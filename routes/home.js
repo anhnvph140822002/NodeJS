@@ -1,12 +1,12 @@
-const express = require('express');
-const route = express.Router();
+import express from "express";
+const router = express.Router();
 
 
-route.get('/', (request,response) =>{
+router.get('/', (request,response) =>{
     response.send(`
        <h1>home page </h1>
     `);
  });
 
 
- module.exports = route;
+export default router

@@ -1,15 +1,15 @@
 // bước 1: include thư viện http
-const http = require('http');
-
-const express = require('express');
+// const express = require('express');
+import express from 'express';
+import homeroute from 'routes/home'
+import productroute from 'routes/product'
+import detalproductroute from 'routes/detalproduct'
 const app = express();
-const server = http.createServer(app);
 
-const homeroute = require('./routes/home');
+
+app.use(express.json);
 app.use(homeroute);
-const productroute = require('./routes/product');
 app.use(productroute);
-const detalproductroute = require('./routes/detalproduct');
 app.use(detalproductroute);
 
 //bước 2: khởi tạo server
@@ -42,6 +42,6 @@ app.use(detalproductroute);
 
 //bước 3: lắng nghe cổng thực thi
 const port = 3001;
-server.listen(port, () => {
+app.listen(port, () => {
     console.log(` server is running on ${port} `);
 });

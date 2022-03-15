@@ -1,10 +1,21 @@
-const express = require('express');
-const route = express.Router();
+import express from "express";
+const router = express.Router();
+const products = [
+   {id:1 , name:"product 1"},
+   {id:2 , name:"product 2"}
+]
 
-route.get('/products', (request,response)=>{
-    response.send(`
-       <h1>product page </h1>
-    `);
+router.get('/products', (request,response)=>{
+    response.json(products)
  })
+ router.get('/products/:id', (request,response)=>{
+    const product = products.find(item =>  item.id === +request.params.id)
+    response.json(product)
+})
+router.post('/product',(request,response) =>{
+   products.push(request.body)
+   response.json(products)
+})
 
-module.exports = route;
+
+export default router
