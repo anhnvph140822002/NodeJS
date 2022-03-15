@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js --exec babel-node -e js"
+    "start": "nodemon --exec npx babel-node app.js"
   },
   "repository": {
     "type": "git",

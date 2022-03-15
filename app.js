@@ -1,16 +1,14 @@
 // bước 1: include thư viện http
 // const express = require('express');
 import express from 'express';
-import homeroute from 'routes/home'
-import productroute from 'routes/product'
-import detalproductroute from 'routes/detalproduct'
+import homeroute from './routes/home';
+import productroute from './routes/product';
 const app = express();
 
 
 app.use(express.json);
 app.use(homeroute);
-app.use(productroute);
-app.use(detalproductroute);
+app.use("api",productroute);
 
 //bước 2: khởi tạo server
 // const server =http.createServer((request,response) => {
