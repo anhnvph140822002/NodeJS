@@ -3,12 +3,17 @@
 import express from 'express';
 import homeroute from './routes/home';
 import productroute from './routes/product';
+import mongoose from 'mongoose';
+
+
 const app = express();
 
 
-app.use(express.json);
+app.use(express.json());
 app.use(homeroute);
-app.use("api",productroute);
+app.use("/api",productroute);
+
+mongoose.connect('mongodb://localhost:27017/nodejsvanh');
 
 //bước 2: khởi tạo server
 // const server =http.createServer((request,response) => {
