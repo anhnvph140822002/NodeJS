@@ -1,28 +1,20 @@
 import { response } from "express"
 import { request } from "express"
-import Product from "../models/products"
+import category from "../models/category"
 
-// const products = [
-//     {id: 1, name: "Product 1"},
-//     {id: 2, name: "Product 2"},
-//     {id: 3, name: "Product 3"},
-//     {id: 4, name: "Product 4"},
-//     {id: 5, name: "Product 5"}
 
-// ]
-
-export const listProduct = async (request, response) => {
+export const listCategory = async (request, response) => {
     try{
-        const product = await Product.find().exec()
+        const product = await category.find().exec()
         response.json(product)
         }catch(error){
         response.status(400).json({message:"Loi"})
         }
     // response.json(products)
 }
-export const listProductDetail = (request, response) => {
+export const listCategoryDetail = (request, response) => {
     try {
-        const product = Product.findOne({_id:request.params.id}).exec()
+        const product = category.findOne({_id:request.params.id}).exec()
         response.json(product)
     } catch (error) {
         response.status(400).json({message:"Lỗi data"})
@@ -30,9 +22,9 @@ export const listProductDetail = (request, response) => {
     // const product = products.find(item => item.id === +request.params.id)
     // response.json(product)
 }
-export const createProduct = async (request, response) => {
+export const createCategory = async (request, response) => {
     try {
-        const product = await Product(request.body).save()
+        const product = await category(request.body).save()
         response.json(product)
     } catch (error) {
         response.status(400).json({message:"k thể thêm sp"})
@@ -40,9 +32,9 @@ export const createProduct = async (request, response) => {
     // products.push(request.body)
     // response.json(products)
 }
-export const deleteProduct = (request, response)=> {
+export const deleteCategory = (request, response)=> {
     try {
-        const product = Product.findOneAndDelete({_id:request.params.id}).exec()
+        const product = category.findOneAndDelete({_id:request.params.id}).exec()
         response.json(product)
     } catch (error) {
         response.status(400).json({message:"k thể xóa sp"})
@@ -50,9 +42,9 @@ export const deleteProduct = (request, response)=> {
     // const product = products.filter(item => item.id != +request.params.id)
     // response.json(product)
 }
-export const updateProduct = async (request, response)=> {
+export const updateCategory = async (request, response)=> {
     try {
-        const product = await Product.findOneAndUpdate({_id:request.params.id},request.body,{new:true}).exec()
+        const product = await category.findOneAndUpdate({_id:request.params.id},request.body,{new:true}).exec()
         response.json(product)
     } catch (error) {
         response.status(400).json({message:"k thể update sp"})
