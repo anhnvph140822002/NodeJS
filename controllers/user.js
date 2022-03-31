@@ -5,7 +5,7 @@ export const userById = async (req, res, next, id) => {
         const user = await User.findById(id).exec();
         if(!user){
             res.status(400).json({
-                message: "Không tìm thấy user"
+                message: "đéo tìm thấy user"
             })
         }
         req.profile = user;

@@ -2,11 +2,10 @@
 import express from 'express';
 import homeroute from './routes/home';
 import productroute from './routes/product';
+import authRoute from './routes/auth';
 import cors from 'cors'
 import mongoose from 'mongoose';
-// import morgan from 'morgan';
 import categoryroute from './routes/category';
-import authRoute from './routes/auth';
 
 const app = express();
 //middleware

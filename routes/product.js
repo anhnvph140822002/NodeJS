@@ -1,3 +1,4 @@
+import { userById } from '../controllers/user';
 
 
 const express = require('express');
@@ -10,10 +11,13 @@ router.get('/products', listProduct);
 
 router.get('/products/:id', listProductDetail);
 
-router.post('/products', createProduct);
+router.post('/products/:userId', createProduct);
 
 router.delete('/products/:id', deleteProduct);
 
 router.put('/products/:id', updateProduct);
 
+
+
+router.param("userId", userById)
 export default router;

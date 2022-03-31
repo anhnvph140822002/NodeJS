@@ -1,21 +1,21 @@
-import req from 'express/lib/request';
 import User from '../models/user';
+import jwt from 'jsonwebtoken'
 
-
-export const register = async (req, res) => {
-    const {mane, meial, password} = req.body;
+export const signup = async (req, res) => {
+    const {name, email, password} = req.body;
+    // console.log(req.body)
     try {
-        const exisUser = await User.findOne({email}). exec();
+        const exisUser = await User.findOne({email}).exec();
         if (exisUser) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "tk đá có"
             })
         }
-        const user = await new User({email, name, password}).save();
-
+        const user = await new User({name, email, password}).save();
+        console.log(user)
         res.json({
             user: {
-                id: user.id,
+                _id: user._id,
                 email: user.email,
                 name: user.name
             }
@@ -26,28 +26,32 @@ export const register = async (req, res) => {
         })
     }
 }
-export const login = async (req, res) => {
-    const { email, password} = req.body;
+export const signin = async (req, res) => {
+    const {email,password} = req.body
+    //console.log(req.body)
     try {
-        const user = await User.findOne({email}).exec();
+        const user = await User.findOne({email}).exec()
         if(!user){
-            res.status(400).json({
-                message: "Email không tồn tại"
+            console.log(user);
+            return res.status(400).json({
+                
+                message:"User khong ton tai"
             })
         }
         if(!user.authenticate(password)){
-            res.status(400).json({
-                message: "Mật khẩu không đúng"
+            return res.status(400).json({
+                message:"Mat khau khong dung"
             })
         }
         const token = jwt.sign({_id: user._id}, "123456", { expiresIn: '1h'})
         res.json({
-            token,
-            user: {
-                _id: user._id,
-                email: user.email,
-                name: user.name
+            user:{
+                token,
+                _id:user._id,
+                email:user.email,
+                name:user.name
             }
+            
         })
     } catch (error) {
         res.status(400).json({
