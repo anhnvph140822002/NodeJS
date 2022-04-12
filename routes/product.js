@@ -1,4 +1,4 @@
-import { userById } from '../controllers/user';
+// import { userById } from '../controllers/user';
 
 
 const express = require('express');
@@ -19,5 +19,5 @@ router.put('/products/:id', updateProduct);
 
 
 
-router.param("userId", userById)
+// router.param("userId", userById)
 export default router;
